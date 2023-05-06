@@ -42,18 +42,26 @@ const Middlebox = ({ socket }) => {
     return (
         <div className="middleBox_outer">
             {
-                joinedChat ? <>
-                    <button onClick={handleToggle}>Disconnect</button>
-                    <p className="userName">{'['+userName+'] '}Room:{roomName}</p>
+                joinedChat ? <div className="discconnect_menu">
+                     Welcome: 
+                     <span className="userName">{'  '+userName }
+                     </span>
+                      <br />
+                     Active Room:
+                     <span className="roomName">{' '+roomName}</span> 
+                     <br />
+                    <button className="btn_toggle_connect_disconnect" onClick={handleToggle}>Disconnect</button>  
                     <div className="middlebox">
                         <ChatBox socket ={socket} name ={userName} room= {roomName}/>
                     </div>
-                </> :
+                </div> :
+                <div className="fourm_supporter">
                     <div className="join_fourm">
-                        <input onChange={(e) => setUserName(e.target.value)} type="text" placeholder="User Name" />
-                        <input onChange={(e) => setRoomName(e.target.value)} type="text" placeholder="Room Name" />
-                        <button onClick={handleToggle}>Connect</button>
-                    </div>
+                        <input className="input_box"  onChange={(e) => setUserName(e.target.value)} type="text" placeholder="User Name" />
+                        <input className="input_box" onChange={(e) => setRoomName(e.target.value)} type="text" placeholder="Room Name" />
+                        <button className="btn_toggle_connect_disconnect" onClick={handleToggle}>Connect</button>
+                    </div>  
+                </div>
 
             }
         </div>

@@ -77,10 +77,9 @@ a:hover
 {
   background-color: #3a3a3a;
   width: 90vw;
-  height: 90vh;
+  height: 75vh;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .chatBox
@@ -128,18 +127,21 @@ a:hover
 .msgBox
 {
   width: 70%;
-  height: 5vh;
-  margin: 1rem 4%;
+  height: 5vh;  
+  margin: 1rem 1%;
   border: none;
+  border-radius: 10px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.47);
 }
 
 .msgBox_btn
 {
   padding: .5rem;
-  width: 20%;
+  width: fit-content;
   border: none;
+  border-radius: 10px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.47);
+  background-color: wheat;
 }
 
 .chatContainer
@@ -150,6 +152,8 @@ a:hover
   height: 77%;
   overflow-y: scroll;
   overflow-x: hidden;
+
+  scroll-behavior:smooth;
 }
 
 .middleBox_outer
@@ -161,31 +165,47 @@ a:hover
 
 .join_fourm
 {
-  position: absolute;  
   width: 20vw;
   padding: 20px;
-  margin-top: 20%;
-  margin-left: 50%;
-  transform: translate(-50%,-50%);
+  
 }
 
 .userName
 {
-  color: white;
+  color: wheat;
+  text-shadow: 1px 1px 5px black;
+  
+}
+
+.roomName
+{
+  color: skyblue;
+  text-shadow: 1px 1px 5px black;
 }
 
 .activeUser
 {
-  color: rgb(0, 254, 0);
-  text-shadow: 1px 1px 5px black;
+  color: rgb(0, 197, 219);
+  text-shadow: 1px 1px 1px black;
   font-size: 1.1rem;
   font-weight: 900;
   margin-right: .5rem;
+  text-transform: capitalize;
 }
 
 .otherUser
 {
-  color:rgb(0, 255, 234);
+  color:rgb(0, 81, 255);
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-right: .5rem;
+  text-transform: capitalize;
+}
+
+.admin
+{
+  color:rgb(255, 0, 0);
   text-shadow: 1px 1px 5px black;
   font-size: 1.1rem;
   font-weight: 900;
@@ -194,22 +214,80 @@ a:hover
 
 .bg_one
 {
-  background-color: #c2c2c2;
+  background-color: rgb(252, 241, 220);
   width: 80%;
   border-radius: 20px;
   margin:.7rem 1%;
   padding: .5rem;
   font-size: 2.25vh;
+  color: rgb(56, 56, 56);
+  text-align: justify;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.424);
 }
 
 .bg_two
 {
-  background-color: rgb(170, 170, 170);
+  background-color: rgb(199, 199, 199);
   width: 80%;
   border-radius: 20px;
   margin:.7rem 17%;
   padding: .5rem;
   font-size: 2.25vh;
+  text-align: justify;
+  color: rgb(56, 56, 56);
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.424);
+}
+
+.bg_three
+{
+  /* background-color: rgb(255, 255, 255); */
+  width: 100%;
+  /* border-radius: 20px; */
+  margin:.7rem 0%;
+  padding: .5rem;
+  font-size: 2.25vh;
+  font-weight: 900;
+  text-align: center;
+  color: rgb(93, 93, 93);
+
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.141);
+}
+
+.input_box
+{
+  padding: .5rem;
+}
+
+.btn_toggle_connect_disconnect
+{
+  margin-top: .5rem;
+  padding: .2rem 1rem;
+}
+
+.fourm_supporter
+{
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.discconnet_menu
+{
+  margin: 2%;
+}
+
+.discconnect_menu
+{
+  width: 20%;
+  text-align: center;
+  color: rgb(0, 229, 255);
+}
+.admin_Refering
+{
+  color: blue;
 }

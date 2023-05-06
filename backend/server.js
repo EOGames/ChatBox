@@ -35,7 +35,7 @@ io.on('connection',(socket)=>
     socket.on('leave',(userObject)=>
     {
         socket.leave
-        io.to(userObject.roomName).emit('msgFromServer',`${botName} User ${userObject.userName} left room ${userObject.roomName}`);
+        io.to(userObject.roomName).emit('msgFromServer',`${botName} User ${userObject.userName}left room ${userObject.roomName}`);
         console.log(`${userObject.userName} Left Room Name :${userObject.roomName}`);
     });
 
@@ -46,7 +46,7 @@ io.on('connection',(socket)=>
 
             userName:botName,
             roomName: userObject.roomName,
-            usermsg: `${userObject.userName} Joined Room ${userObject.roomName}`
+            usermsg: `[${userObject.userName}] Joined Room ${userObject.roomName}`
         };
       io.to(userObject.roomName).emit('msgFromServer',returningObject);
         console.log(socket.id + " Joined UserObject:",userObject);

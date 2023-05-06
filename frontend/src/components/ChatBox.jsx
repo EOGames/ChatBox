@@ -34,9 +34,15 @@ const ChatBox = ({socket,name,room})=>
     const sendMsg = ()=>
     {
         let userMsg = curMsg.current.value;
-        console.log('USER MSG : ',userMsg);
-         socket.emit('msgFromUser',name,room,userMsg);
-         msg_box.value = '';
+        if (userMsg.length>0 && userMsg.trim().length >0)
+        {
+            console.log('USER MSG : ',userMsg);
+            socket.emit('msgFromUser',name,room,userMsg);
+            msg_box.value = '';
+        }else
+        {
+            console.log("User Msg Is Empty");
+        }
 
     }
     
@@ -50,7 +56,7 @@ const ChatBox = ({socket,name,room})=>
                         
                         chats.map((c,index)=>
                         
-                            <div className={name===c.userName ?'bg_one':'bg_two'} key={'chat_'+index}>{<span className={name===c.userName ? 'activeUser': 'otherUser'} >{c.userName}</span>}{c.usermsg}
+                            <div className={c.userName === 'ADMIN' ? 'bg_three': name===c.userName ?'bg_one':'bg_two'} key={'chat_'+index}>{<span className={c.userName=== 'ADMIN' ? 'admin' : name===c.userName ? 'activeUser': 'otherUser'} >{c.userName}</span>}{c.usermsg}
                             </div>
                         )                       
                         
