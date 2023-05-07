@@ -25,7 +25,7 @@ code {
 }
 .topbar
 {
-  background-color: #808080;
+  background-color: #5b5959;
   height: 10vh;
   width: 100vw;
   border-bottom: 2px solid black;
@@ -58,6 +58,8 @@ li
   margin: 0;
   list-style: none;
   padding: .7rem 0rem;
+  font-size: 1vw;
+  display: flex;
 }
 
 a
@@ -85,8 +87,8 @@ a:hover
 .chatBox
 {
   background-color: rgb(204 204 204);
-  width: 30vw;
-  height: 80%;
+  width: 25vw;
+  height: 90%;
   /* border: 2px solid rgb(118, 50, 2); */
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.435);
   border-top-right-radius: 20px;
@@ -125,10 +127,10 @@ a:hover
 }
 
 .msgBox
-{
+{ 
   width: 70%;
-  height: 5vh;  
-  margin: 1rem 1%;
+  height: 5vh;
+  margin: 1rem 1.5vw;
   border: none;
   border-radius: 10px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.47);
@@ -149,7 +151,7 @@ a:hover
   background-color: #ccc;
   width: 100%;
   margin-top: .1%;
-  height: 77%;
+  height: 72%;
   overflow-y: scroll;
   overflow-x: hidden;
 
@@ -165,16 +167,18 @@ a:hover
 
 .join_fourm
 {
-  width: 20vw;
-  padding: 20px;
-  
+  width: fit-content;
+  color:white;
+  display: flex;
+  flex-direction: column; 
 }
+
 
 .userName
 {
   color: wheat;
   text-shadow: 1px 1px 5px black;
-  
+  text-transform: capitalize;  
 }
 
 .roomName
@@ -216,9 +220,9 @@ a:hover
 {
   background-color: rgb(252, 241, 220);
   width: 80%;
-  border-radius: 20px;
-  margin:.7rem 1%;
-  padding: .5rem;
+  border-radius: 10px;
+  margin:.2rem 1%;
+  padding: .4rem;
   font-size: 2.25vh;
   color: rgb(56, 56, 56);
   text-align: justify;
@@ -229,9 +233,9 @@ a:hover
 {
   background-color: rgb(199, 199, 199);
   width: 80%;
-  border-radius: 20px;
-  margin:.7rem 17%;
-  padding: .5rem;
+  border-radius: 10px;
+  margin:.2rem 17%;
+  padding: .4rem;
   font-size: 2.25vh;
   text-align: justify;
   color: rgb(56, 56, 56);
@@ -240,11 +244,9 @@ a:hover
 
 .bg_three
 {
-  /* background-color: rgb(255, 255, 255); */
   width: 100%;
-  /* border-radius: 20px; */
-  margin:.7rem 0%;
-  padding: .5rem;
+  margin:.2rem 0%;
+  padding: .4rem;
   font-size: 2.25vh;
   font-weight: 900;
   text-align: center;
@@ -261,7 +263,11 @@ a:hover
 .btn_toggle_connect_disconnect
 {
   margin-top: .5rem;
-  padding: .2rem 1rem;
+  padding: .5rem 1rem;
+  background-color: wheat;
+  border: 0;
+  font-weight: 900;
+  font-size: 100%;
 }
 
 .fourm_supporter
@@ -276,18 +282,74 @@ a:hover
   height: 100%;
 }
 
-.discconnet_menu
-{
-  margin: 2%;
-}
-
 .discconnect_menu
 {
-  width: 20%;
+  /* margin: 2%; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;  
+  width: 30%;
   text-align: center;
   color: rgb(0, 229, 255);
 }
+
+
 .admin_Refering
 {
   color: blue;
+}
+
+.timeStamp
+{
+  margin: 0;
+  padding: 0;
+  color: #595959;
+  font-size: .5rem;
+  width: 100%;
+  text-align: center;
+  display: list-item;
+}
+
+@media screen and (max-width:1200px)  {
+  .chatBox
+  {
+    width: 40vw;
+  }
+
+  *
+  {
+    font-size: 1.1rem;
+  }
+
+  
+  
+
+}
+
+@media screen and (max-width:560px)  {
+  .chatBox
+  {
+    width: 70vw;
+  }
+
+  *
+  {
+    font-size: 1.1rem;
+  }
+
+  .discconnect_menu
+  {
+    display: flex;
+    flex-wrap: wrap;
+    width: 99vw;
+    margin: 2%;
+    flex-direction: row;
+  }
+
+  
+}
+
+.leftRightMargin
+{
+  margin: 0rem 1rem 0rem 0rem;
 }

@@ -1,28 +1,30 @@
 const express = require('express');
 const app = express();
 const httpServer = require('http').createServer(app);
+const io  = require('socket.io')(httpServer,{
+    cors: {
+        
+        origin:'*',
+        methods: ['GET','POST'],
+    }
+});
+
+const ChatModel = require('./Model/ChatModel');
 
 const botName = 'ADMIN';
-const corsOptions = {
-    
-    origin:'*',
-    methods: ['GET','POST'],
-  };
 
-
-const io  = require('socket.io')(httpServer,{
-    cors: corsOptions
-});
-// const cors = require('cors');
-
-
-// app.use(cors(corsOptions));
 app.get('/',(req,res) =>
 {
     res.send('From Server');
 });
 
+app.get('/getHistory', async(req,res)=>
+{
+    let data =  await ChatModel.find(req.body);
+    res.send(data);
+});
 
+//#region ChatSystem
 io.on('connection',(socket)=>
 {
     console.log('User Connected',socket.id);
@@ -34,9 +36,12 @@ io.on('connection',(socket)=>
 
     socket.on('leave',(userObject)=>
     {
-        socket.leave
-        io.to(userObject.roomName).emit('msgFromServer',`${botName} User ${userObject.userName}left room ${userObject.roomName}`);
-        console.log(`${userObject.userName} Left Room Name :${userObject.roomName}`);
+        socket.leave();
+        userObject.userMsg = `User [${userObject.userName}] left room [${userObject.roomName}]`;
+        userObject.userName = botName;
+        // console.log('UserObject On Leave', userObject);
+        io.to(userObject.roomName).emit('msgFromServer',userObject);
+        // console.log(`${userObject.userName} Left Room Name :${userObject.roomName}`);
     });
 
     socket.on('join',(userObject)=>
@@ -46,25 +51,46 @@ io.on('connection',(socket)=>
 
             userName:botName,
             roomName: userObject.roomName,
-            usermsg: `[${userObject.userName}] Joined Room ${userObject.roomName}`
+            userMsg: `[${userObject.userName}] Joined Room ${userObject.roomName}`
         };
       io.to(userObject.roomName).emit('msgFromServer',returningObject);
         console.log(socket.id + " Joined UserObject:",userObject);
     });
 
-    socket.on('msgFromUser',(userName,roomName,usermsg)=>
+    socket.on('msgFromUser', async (userName,roomName,usermsg,msgTime,sessionId)=>
     {
+        console.log('Time Type ',typeof msgTime);
         let chatObject = {
             userName:userName,
             roomName: roomName,
-            usermsg: usermsg
+            userMsg: usermsg,
+            msgTime: msgTime,
+            sessionId:sessionId,
         }
         io.to(roomName).emit('msgFromServer',chatObject);
-        console.log(`User ${userName} in Room Name: ${roomName} Chat Is: ${usermsg}`);
+
+        let model = new ChatModel(
+            {
+                roomName:roomName,
+                chatObject:{
+                    userName:userName,
+                    userMsg: usermsg,
+                    msgTime: msgTime,
+                    sessionId:sessionId,        
+                },
+            }
+        );
+        
+        let data = await model.save();
+       
+        console.log('date:',data);
+        // console.log(`User ${userName} in Room Name: ${roomName} Chat Is: ${usermsg} and time is ${msgTime}`);
     });
 
 
 });
+//#endregion
+
 
 httpServer.listen(5500,()=>
 {

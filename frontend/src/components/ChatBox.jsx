@@ -6,6 +6,7 @@ const ChatBox = ({socket,name,room})=>
     const [chats,setChats] = useState([]);
     const msg_box = document.getElementById('msg_box');
 
+    const sessionId = sessionStorage.getItem('activeSession');
     
     const scrollToBottom = ()=>
     {
@@ -15,7 +16,7 @@ const ChatBox = ({socket,name,room})=>
             if (chat_Container)
             {
                 chat_Container.scrollTop = chat_Container.scrollHeight *4;
-                console.log('Scroll '+ chat_Container.scrollTop);
+               // console.log('Scroll '+ chat_Container.scrollTop);
             }
 
         },100)
@@ -36,8 +37,8 @@ const ChatBox = ({socket,name,room})=>
         let userMsg = curMsg.current.value;
         if (userMsg.length>0 && userMsg.trim().length >0)
         {
-            console.log('USER MSG : ',userMsg);
-            socket.emit('msgFromUser',name,room,userMsg);
+            console.log('Active Id : ',sessionId);
+            socket.emit('msgFromUser',name,room,userMsg,new Date().toUTCString(),sessionId);
             msg_box.value = '';
         }else
         {
@@ -56,8 +57,11 @@ const ChatBox = ({socket,name,room})=>
                         
                         chats.map((c,index)=>
                         
-                            <div className={c.userName === 'ADMIN' ? 'bg_three': name===c.userName ?'bg_one':'bg_two'} key={'chat_'+index}>{<span className={c.userName=== 'ADMIN' ? 'admin' : name===c.userName ? 'activeUser': 'otherUser'} >{c.userName}</span>}{c.usermsg}
+                        <div>
+                             <span className="timeStamp">{c.msgTime}</span>
+                            <div className={c.userName === 'ADMIN' ? 'bg_three': name===c.userName ?'bg_one':'bg_two'} key={'chat_'+index}>{<span className={c.userName=== 'ADMIN' ? 'admin' : name===c.userName ? 'activeUser': 'otherUser'} >{c.userName}</span>}{c.userMsg}
                             </div>
+                        </div>
                         )                       
                         
                     }

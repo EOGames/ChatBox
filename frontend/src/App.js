@@ -1,8 +1,9 @@
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
 import Middlebox from './components/Middlebox';
+import ChatHistory from './pages/ChatHistory';
 import io from 'socket.io-client';
-import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 function App() 
 {
@@ -15,7 +16,12 @@ function App()
       <div className='layout'>
 
         <Sidebar />
-        <Middlebox socket={socket} />
+
+        <Routes>
+            <Route path='/' element={<Middlebox socket={socket} />} ></Route>
+            <Route path='/history' element={<ChatHistory />} ></Route>
+           
+        </Routes>
       </div>
     </div>
   );

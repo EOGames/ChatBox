@@ -10,7 +10,6 @@ const Sidebar = () =>
                 </li>
                 <li>
                 <Link className="link" to={'/history'}>Chathistory</Link>
-
                 </li>
             </ul>
 
